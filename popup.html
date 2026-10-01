@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Epoch Converter</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Epoch Converter</h1>
+  </header>
+
+  <section class="card">
+    <div class="label-row">
+      <span class="label">Current Unix Timestamp</span>
+      <button class="copy-btn" data-copy-target="currentEpoch">Copy</button>
+    </div>
+    <div class="big-value" id="currentEpoch">–</div>
+    <div class="sub-value" id="currentHuman">–</div>
+  </section>
+
+  <section class="card">
+    <h2>Timestamp → Human date</h2>
+    <div class="row">
+      <input type="text" id="epochInput" placeholder="e.g. 1735689600" inputmode="numeric">
+      <select id="epochUnit">
+        <option value="auto">Auto-detect</option>
+        <option value="s">Seconds</option>
+        <option value="ms">Milliseconds</option>
+        <option value="us">Microseconds</option>
+        <option value="ns">Nanoseconds</option>
+      </select>
+    </div>
+    <div class="result" id="epochToDateResult">
+      <div class="result-line"><span class="tag">Local</span><span id="resultLocal">–</span></div>
+      <div class="result-line"><span class="tag">UTC</span><span id="resultUtc">–</span></div>
+      <div class="result-line"><span class="tag">ISO 8601</span><span id="resultIso">–</span></div>
+      <div id="pinnedZoneRows"></div>
+      <div class="result-line">
+        <input type="text" id="adhocZoneSearch1" list="allZonesList" placeholder="more zones…" class="adhoc-input">
+      </div>
+      <div id="adhocZoneRow1"></div>
+      <div class="result-line"><span class="tag">Relative</span><span id="resultRelative">–</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Human date → Timestamp</h2>
+    <div class="row">
+      <input type="datetime-local" id="dateInput" step="1">
+      <select id="dateTz">
+        <option value="local">Local time</option>
+        <option value="utc">UTC</option>
+      </select>
+    </div>
+    <div class="row" id="dateTzCustomRow" style="display:none;">
+      <input type="text" id="dateTzCustomInput" list="allZonesList" placeholder="Search any timezone…">
+    </div>
+    <div class="row">
+      <button id="useNowBtn">Use now</button>
+    </div>
+    <div class="result">
+      <div class="result-line"><span class="tag">Seconds</span><span id="resultSeconds">–</span>
+        <button class="copy-btn small" data-copy-target="resultSeconds">Copy</button>
+      </div>
+      <div class="result-line"><span class="tag">Milliseconds</span><span id="resultMs">–</span>
+        <button class="copy-btn small" data-copy-target="resultMs">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="label-row">
+      <span class="label">Pinned Timezones</span>
+      <span class="hint">up to 3</span>
+    </div>
+    <div class="zone-chip-row" id="curatedZones"></div>
+    <div class="row">
+      <input type="text" id="zoneSearch" list="allZonesList" placeholder="Search any timezone…">
+      <button id="zoneSearchAdd">Pin</button>
+    </div>
+    <datalist id="allZonesList"></datalist>
+    <div class="pinned-list" id="pinnedList"></div>
+  </section>
+
+  <section class="card">
+    <div class="label-row">
+      <span class="label">On-page Hover</span>
+    </div>
+    <label class="toggle-row">
+      <input type="checkbox" id="hoverToggle">
+      <span>Show a popup when hovering timestamps on any webpage</span>
+    </label>
+  </section>
+
+  <footer>
+    <span id="toast"></span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

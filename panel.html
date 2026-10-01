@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Epoch Panel</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <div class="toolbar">
+    <button class="tab-btn active" data-tab="network">Network</button>
+    <button class="tab-btn" data-tab="paste">Paste text</button>
+    <input type="text" id="search" class="search-box" placeholder="Filter by URL…">
+    <select id="typeFilter">
+      <option value="">All types</option>
+      <option value="json">Fetch/XHR</option>
+      <option value="html">Doc</option>
+      <option value="css">CSS</option>
+      <option value="js">JS</option>
+      <option value="img">Img</option>
+      <option value="font">Font</option>
+      <option value="other">Other</option>
+    </select>
+    <label class="preserve-row"><input type="checkbox" id="preserveLog">Preserve log</label>
+    <button id="clearBtn" title="Clear captured requests">Clear</button>
+  </div>
+
+  <div id="networkTab" class="tab-content active">
+    <div class="split">
+      <div class="table-wrap">
+        <div class="table-header">
+          <span class="col col-name">Name</span>
+          <span class="col col-method">Method</span>
+          <span class="col col-status sortable" data-sort="status">Status</span>
+          <span class="col col-type">Type</span>
+          <span class="col col-size sortable" data-sort="size">Size</span>
+          <span class="col col-time sortable" data-sort="time">Time</span>
+        </div>
+        <div class="req-list" id="requestList">
+          <div class="empty-hint">Reload the page or trigger a request — responses will appear here. Click one to inspect headers, body, and timing. Any epoch timestamp is underlined — hover it for the converted date.</div>
+        </div>
+      </div>
+      <div class="splitter" id="splitter"></div>
+      <div class="detail-pane" id="detailPane">
+        <div class="detail-empty">Select a request to see its details.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pasteTab" class="tab-content">
+    <textarea id="pasteInput" placeholder="Paste JSON, logs, or any text containing epoch timestamps (e.g. copied from the Console)…"></textarea>
+    <pre class="viewer" id="pasteViewer"></pre>
+  </div>
+
+  <script src="panel.js"></script>
+</body>
+</html>
